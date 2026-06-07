@@ -1,0 +1,10 @@
+{
+  "name": "ea-fc-26-root",
+  "version": "1.0.0",
+  "description": "Root forwarding configuration for EA Sports FC 26 Player Analytics Platform",
+  "scripts": {
+    "dev": "npm run dev --prefix src/backend",
+    "start": "npm run start --prefix src/backend",
+    "seed": "npm run seed --prefix src/backend"
+  }
+}
