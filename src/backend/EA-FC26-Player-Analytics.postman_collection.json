@@ -1,0 +1,522 @@
+{
+  "info": {
+    "_postman_id": "c0446806-0107-6201-931a-e52637738f62",
+    "name": "EA Sports FC 26 Player Analytics Platform API",
+    "description": "Complete REST API collection for EA Sports FC 26 Player Analytics Platform. Supports Authentication, Player CRUD, Advanced Query Filtering, Comparison calculations, and Aggregation Dashboard metrics.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health System",
+      "item": [
+        {
+          "name": "Uptime Checker",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Returns standard system uptime, operational status, and system configurations."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "User Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"john@analytics.com\",\n  \"password\": \"securedpass123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Creates a new user profile and returns a dynamic JWT Bearer authorization token."
+          },
+          "response": []
+        },
+        {
+          "name": "User Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data.token) {",
+                  "    pm.environment.set(\"token\", jsonData.data.token);",
+                  "    console.log(\"Saved authorization JWT to environment variables!\");",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@analytics.com\",\n  \"password\": \"adminpassword\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Examines login requests. Stores the parsed token to local collection environment variables."
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch User Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
+            },
+            "description": "Verifies JWT auth token and loads full user details."
+          },
+          "response": []
+        },
+        {
+          "name": "User Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Triggers user logout routine and handles token invalidations."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Player Management",
+      "item": [
+        {
+          "name": "Get Players List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/players?limit=10&page=1&sort=-overall&league=LaLiga",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "sort",
+                  "value": "-overall"
+                },
+                {
+                  "key": "league",
+                  "value": "LaLiga"
+                }
+              ]
+            },
+            "description": "Fetches players matching search filters, custom fields, and sorting rules."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Player By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/players/6a17322ffdeab59e141de92c",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players",
+                "6a17322ffdeab59e141de92c"
+              ]
+            },
+            "description": "Returns full details for a specific player profile by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Player (Admin Required)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Lamine Yamal\",\n  \"overall\": 84,\n  \"pace\": 89,\n  \"shooting\": 79,\n  \"passing\": 81,\n  \"dribbling\": 88,\n  \"defending\": 31,\n  \"physical\": 62,\n  \"team\": \"FC Barcelona\",\n  \"league\": \"LaLiga\",\n  \"nation\": \"Spain\",\n  \"position\": \"RW\",\n  \"age\": 17,\n  \"playstyles\": [\"Technical\", \"Finesse Shot\"],\n  \"weakFoot\": 3,\n  \"skillMoves\": 4,\n  \"preferredFoot\": \"Left\",\n  \"gender\": \"Male\",\n  \"rank\": 72\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/players",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players"
+              ]
+            },
+            "description": "Creates a new player profile database entry. Restricted to Administrators."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Player (Admin Required)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"overall\": 86,\n  \"dribbling\": 90\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/players/6a17322ffdeab59e141de92c",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players",
+                "6a17322ffdeab59e141de92c"
+              ]
+            },
+            "description": "Updates a player profile by ID. Restricted to Administrators."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Player (Admin Required)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/players/6a17322ffdeab59e141de92c",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players",
+                "6a17322ffdeab59e141de92c"
+              ]
+            },
+            "description": "Performs an indexed soft deletion on the selected player profile."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics Dashboards",
+      "item": [
+        {
+          "name": "Top Rated Players",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/top-rated",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "top-rated"
+              ]
+            },
+            "description": "Retrieves high performing players sorted by overall stats."
+          },
+          "response": []
+        },
+        {
+          "name": "Top Clubs Aggregations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/top-teams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "top-teams"
+              ]
+            },
+            "description": "Retrieves top 5 clubs ordered by their player averages."
+          },
+          "response": []
+        },
+        {
+          "name": "Top Leagues Aggregations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/top-leagues",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "top-leagues"
+              ]
+            },
+            "description": "Retrieves top 5 leagues ordered by average player overall quality."
+          },
+          "response": []
+        },
+        {
+          "name": "Top Nations Aggregations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/top-nations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "top-nations"
+              ]
+            },
+            "description": "Retrieves top 5 nations based on average player overalls."
+          },
+          "response": []
+        },
+        {
+          "name": "Position Distributions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/position-distribution",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "position-distribution"
+              ]
+            },
+            "description": "Fetches count metrics distributing players across different pitch roles."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comparisons",
+      "item": [
+        {
+          "name": "Player head-to-head",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/compare/6a17322ffdeab59e141de92c/6a17322ffdeab59e141de92d",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "compare",
+                "6a17322ffdeab59e141de92c",
+                "6a17322ffdeab59e141de92d"
+              ]
+            },
+            "description": "Returns side-by-side attributes comparison reports between two players."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin Dashboard",
+      "item": [
+        {
+          "name": "General Admin Dashboard",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            },
+            "description": "Returns platform dashboard counts of registered users, active/deleted players, and lists recently added items."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
