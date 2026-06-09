@@ -98,11 +98,7 @@ src/backend/
 Navigate to the backend directory and ensure your `.env` configuration contains appropriate settings:
 ```env
 PORT=3000
-NODE_ENV=development
-MONGODB_URI=mongodb+srv://Rakshit_Raj:Fg8CDRO4kIEDE42G@cluster0.7wpwvto.mongodb.net/football
-JWT_SECRET=supersecure_eafc26_analytics_platform_secret_key_2026
-JWT_EXPIRE=24h
-```
+
 
 ### 2. Install Project Dependencies
 ```bash
