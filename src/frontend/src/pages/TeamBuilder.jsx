@@ -264,10 +264,13 @@ export default function TeamBuilder() {
 
   return (
     <div
-      className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-fixed py-8 animate-fade-up"
-      style={{ backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.55)), url(${teamBuilderBg})` }}
+      className="w-full min-h-screen bg-cover bg-no-repeat bg-fixed py-8"
+      style={{ 
+        backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.55)), url(${teamBuilderBg})`,
+        backgroundPosition: 'center top 75px'
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 animate-fade-up">
 
         {/* Title & Chemistry Indicator Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 border-b border-[#222]/50 pb-6">
