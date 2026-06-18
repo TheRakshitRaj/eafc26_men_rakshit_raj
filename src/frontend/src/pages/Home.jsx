@@ -48,10 +48,10 @@ export default function Home() {
         ]);
 
         setStats({
-          players: countRes.data?.data || 0,
-          avgRating: Math.round(ratingRes.data?.data || 0),
-          teams: teamsRes.data?.data || 0,
-          leagues: leaguesRes.data?.data || 0,
+          players: countRes.data?.data?.count || 0,
+          avgRating: Math.round(ratingRes.data?.data?.averageRating || 0),
+          teams: teamsRes.data?.data?.teamCount || 0,
+          leagues: leaguesRes.data?.data?.leagueCount || 0,
         });
 
         setTopRated(topRatedRes.data?.data || []);

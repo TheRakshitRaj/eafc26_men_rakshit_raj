@@ -24,3 +24,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+src/backend/EA-FC26-Player-Analytics.postman_collection.json
+
+# Frontend Build Output
+src/frontend/dist/
+src/frontend/.env
