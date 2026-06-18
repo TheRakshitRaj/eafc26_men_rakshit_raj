@@ -14,7 +14,7 @@ export default function TeamBuilder() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
 
-  // Formations coordinate registry
+  // Formations coordinate registry (shifted down to prevent player face clipping)
   const formationsData = {
     '4-3-3': [
       { key: 'GK', label: 'GK', posClass: 'GK', bottom: '5%', left: '46.5%' },
@@ -22,12 +22,12 @@ export default function TeamBuilder() {
       { key: 'CB1', label: 'CB', posClass: 'CB', bottom: '20%', left: '32%' },
       { key: 'CB2', label: 'CB', posClass: 'CB', bottom: '20%', left: '60%' },
       { key: 'RB', label: 'RB', posClass: 'RB', bottom: '26%', left: '83%' },
-      { key: 'CM1', label: 'CM', posClass: 'CM', bottom: '48%', left: '22%' },
-      { key: 'CDM', label: 'CDM', posClass: 'CDM', bottom: '38%', left: '46.5%' },
-      { key: 'CM2', label: 'CM', posClass: 'CM', bottom: '48%', left: '71%' },
-      { key: 'LW', label: 'LW', posClass: 'LW', bottom: '74%', left: '15%' },
-      { key: 'ST', label: 'ST', posClass: 'ST', bottom: '82%', left: '46.5%' },
-      { key: 'RW', label: 'RW', posClass: 'RW', bottom: '74%', left: '78%' },
+      { key: 'CM1', label: 'CM', posClass: 'CM', bottom: '45%', left: '22%' },
+      { key: 'CDM', label: 'CDM', posClass: 'CDM', bottom: '35%', left: '46.5%' },
+      { key: 'CM2', label: 'CM', posClass: 'CM', bottom: '45%', left: '71%' },
+      { key: 'LW', label: 'LW', posClass: 'LW', bottom: '66%', left: '15%' },
+      { key: 'ST', label: 'ST', posClass: 'ST', bottom: '74%', left: '46.5%' },
+      { key: 'RW', label: 'RW', posClass: 'RW', bottom: '66%', left: '78%' },
     ],
     '4-4-2': [
       { key: 'GK', label: 'GK', posClass: 'GK', bottom: '5%', left: '46.5%' },
@@ -35,48 +35,74 @@ export default function TeamBuilder() {
       { key: 'CB1', label: 'CB', posClass: 'CB', bottom: '20%', left: '32%' },
       { key: 'CB2', label: 'CB', posClass: 'CB', bottom: '20%', left: '60%' },
       { key: 'RB', label: 'RB', posClass: 'RB', bottom: '26%', left: '83%' },
-      { key: 'LM', label: 'LM', posClass: 'LW', bottom: '50%', left: '10%' },
-      { key: 'CM1', label: 'CM', posClass: 'CM', bottom: '46%', left: '32%' },
-      { key: 'CM2', label: 'CM', posClass: 'CM', bottom: '46%', left: '60%' },
-      { key: 'RM', label: 'RM', posClass: 'RW', bottom: '50%', left: '83%' },
-      { key: 'ST1', label: 'ST', posClass: 'ST', bottom: '78%', left: '30%' },
-      { key: 'ST2', label: 'ST', posClass: 'ST', bottom: '78%', left: '62%' },
+      { key: 'LM', label: 'LM', posClass: 'LW', bottom: '46%', left: '10%' },
+      { key: 'CM1', label: 'CM', posClass: 'CM', bottom: '42%', left: '32%' },
+      { key: 'CM2', label: 'CM', posClass: 'CM', bottom: '42%', left: '60%' },
+      { key: 'RM', label: 'RM', posClass: 'RW', bottom: '46%', left: '83%' },
+      { key: 'ST1', label: 'ST', posClass: 'ST', bottom: '72%', left: '30%' },
+      { key: 'ST2', label: 'ST', posClass: 'ST', bottom: '72%', left: '62%' },
     ],
     '3-5-2': [
       { key: 'GK', label: 'GK', posClass: 'GK', bottom: '5%', left: '46.5%' },
       { key: 'CB1', label: 'CB', posClass: 'CB', bottom: '20%', left: '20%' },
       { key: 'CB2', label: 'CB', posClass: 'CB', bottom: '20%', left: '46.5%' },
       { key: 'CB3', label: 'CB', posClass: 'CB', bottom: '20%', left: '73%' },
-      { key: 'LM', label: 'LM', posClass: 'LW', bottom: '48%', left: '10%' },
-      { key: 'CDM1', label: 'CDM', posClass: 'CDM', bottom: '38%', left: '30%' },
-      { key: 'CDM2', label: 'CDM', posClass: 'CDM', bottom: '38%', left: '63%' },
-      { key: 'RM', label: 'RM', posClass: 'RW', bottom: '48%', left: '83%' },
-      { key: 'CAM', label: 'CAM', posClass: 'CAM', bottom: '58%', left: '46.5%' },
-      { key: 'ST1', label: 'ST', posClass: 'ST', bottom: '80%', left: '30%' },
-      { key: 'ST2', label: 'ST', posClass: 'ST', bottom: '80%', left: '63%' },
+      { key: 'LM', label: 'LM', posClass: 'LW', bottom: '44%', left: '10%' },
+      { key: 'CDM1', label: 'CDM', posClass: 'CDM', bottom: '35%', left: '30%' },
+      { key: 'CDM2', label: 'CDM', posClass: 'CDM', bottom: '35%', left: '63%' },
+      { key: 'RM', label: 'RM', posClass: 'RW', bottom: '44%', left: '83%' },
+      { key: 'CAM', label: 'CAM', posClass: 'CAM', bottom: '54%', left: '46.5%' },
+      { key: 'ST1', label: 'ST', posClass: 'ST', bottom: '73%', left: '30%' },
+      { key: 'ST2', label: 'ST', posClass: 'ST', bottom: '73%', left: '63%' },
     ],
   };
 
-  // Check draftPlayer on mount
+  // Load saved formation and squad from localStorage on mount and check draftPlayer
   useEffect(() => {
+    const savedForm = localStorage.getItem('selectedFormation');
+    const savedSquad = localStorage.getItem('selectedSquad');
+
+    let initialSquad = {};
+    if (savedForm) {
+      setFormation(savedForm);
+    }
+    if (savedSquad) {
+      initialSquad = JSON.parse(savedSquad);
+      setSquad(initialSquad);
+    }
+
     const draft = localStorage.getItem('draftPlayer');
     if (draft) {
       const player = JSON.parse(draft);
-      // Place in first matching position slot if empty
-      const slots = formationsData[formation];
-      const match = slots.find((s) => s.posClass === player.position && !squad[s.key]);
+      const activeFormation = savedForm || '4-3-3';
+      const slots = formationsData[activeFormation];
+      const match = slots.find((s) => s.posClass === player.position && !initialSquad[s.key]);
       if (match) {
-        setSquad((prev) => ({ ...prev, [match.key]: player }));
+        setSquad((prev) => {
+          const updated = { ...prev, [match.key]: player };
+          localStorage.setItem('selectedSquad', JSON.stringify(updated));
+          return updated;
+        });
       } else {
-        // Fallback to first matching position even if filled
         const firstMatch = slots.find((s) => s.posClass === player.position);
         if (firstMatch) {
-          setSquad((prev) => ({ ...prev, [firstMatch.key]: player }));
+          setSquad((prev) => {
+            const updated = { ...prev, [firstMatch.key]: player };
+            localStorage.setItem('selectedSquad', JSON.stringify(updated));
+            return updated;
+          });
         }
       }
       localStorage.removeItem('draftPlayer');
     }
-  }, [formation]);
+  }, []);
+
+  // Save squad changes to localStorage automatically
+  useEffect(() => {
+    if (Object.keys(squad).length > 0) {
+      localStorage.setItem('selectedSquad', JSON.stringify(squad));
+    }
+  }, [squad]);
 
   // Recalculate chemistry when squad roster updates
   useEffect(() => {
@@ -103,7 +129,7 @@ export default function TeamBuilder() {
     fetchChemistry();
   }, [squad]);
 
-  // Query search results for selected slot position
+  // Query search results for selected slot position and filter duplicates
   useEffect(() => {
     const loadSlotPlayers = async () => {
       if (!activeSlot) return;
@@ -118,7 +144,16 @@ export default function TeamBuilder() {
             limit: 8,
           },
         });
-        setSearchResults(response.data?.data || []);
+
+        // Filter out players already present in the squad to prevent reuse
+        const currentSquadPlayerIds = Object.values(squad)
+          .filter(Boolean)
+          .map((p) => p._id || p.id);
+
+        const filtered = (response.data?.data || []).filter(
+          (p) => !currentSquadPlayerIds.includes(p._id || p.id)
+        );
+        setSearchResults(filtered);
       } catch (err) {
         console.error('Error loading slot options:', err);
       } finally {
@@ -128,10 +163,14 @@ export default function TeamBuilder() {
 
     const delay = setTimeout(loadSlotPlayers, 200);
     return () => clearTimeout(delay);
-  }, [activeSlot, searchQuery, formation]);
+  }, [activeSlot, searchQuery, formation, squad]);
 
   const selectPlayerForSlot = (player) => {
-    setSquad((prev) => ({ ...prev, [activeSlot]: player }));
+    setSquad((prev) => {
+      const updated = { ...prev, [activeSlot]: player };
+      localStorage.setItem('selectedSquad', JSON.stringify(updated));
+      return updated;
+    });
     setActiveSlot(null);
     setSearchQuery('');
   };
@@ -141,8 +180,40 @@ export default function TeamBuilder() {
     setSquad((prev) => {
       const copy = { ...prev };
       delete copy[key];
+      localStorage.setItem('selectedSquad', JSON.stringify(copy));
       return copy;
     });
+  };
+
+  const changeFormation = (newForm) => {
+    setFormation(newForm);
+    localStorage.setItem('selectedFormation', newForm);
+
+    // Re-map current players to the new formation slots based on position class to prevent erasing them
+    const currentPlayers = Object.values(squad).filter(Boolean);
+    const newSlots = formationsData[newForm];
+    const newSquad = {};
+    const remainingPlayers = [...currentPlayers];
+
+    // First pass: exact matches by position class
+    newSlots.forEach((slot) => {
+      const matchIdx = remainingPlayers.findIndex((p) => p.position === slot.posClass);
+      if (matchIdx !== -1) {
+        newSquad[slot.key] = remainingPlayers[matchIdx];
+        remainingPlayers.splice(matchIdx, 1);
+      }
+    });
+
+    // Second pass: fill empty slots with remaining players
+    newSlots.forEach((slot) => {
+      if (!newSquad[slot.key] && remainingPlayers.length > 0) {
+        newSquad[slot.key] = remainingPlayers[0];
+        remainingPlayers.splice(0, 1);
+      }
+    });
+
+    setSquad(newSquad);
+    localStorage.setItem('selectedSquad', JSON.stringify(newSquad));
   };
 
   const loadDreamTeam = async () => {
@@ -236,10 +307,7 @@ export default function TeamBuilder() {
             {Object.keys(formationsData).map((form) => (
               <button
                 key={form}
-                onClick={() => {
-                  setFormation(form);
-                  resetSquad(); // Clear layout to avoid overlap bugs
-                }}
+                onClick={() => changeFormation(form)}
                 className={`text-xs font-display font-bold px-3 py-1.5 rounded transition-colors ${formation === form
                     ? 'bg-[#00FF87] text-black shadow'
                     : 'bg-[#1A1A1A] text-[#A0A0A0] border border-[#222] hover:border-[#A0A0A0]/30'
@@ -260,7 +328,10 @@ export default function TeamBuilder() {
               <span>DREAM TEAM XI</span>
             </button>
             <button
-              onClick={resetSquad}
+              onClick={() => {
+                resetSquad();
+                localStorage.removeItem('selectedSquad');
+              }}
               className="flex-1 sm:flex-initial flex items-center justify-center space-x-2 bg-transparent border border-[#FF3B3B] text-[#FF3B3B] hover:bg-red-500/10 font-display font-bold text-xs px-4 py-2 rounded-lg transition-all"
             >
               <FaUndo />
