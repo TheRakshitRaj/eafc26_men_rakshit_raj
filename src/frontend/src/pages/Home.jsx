@@ -92,9 +92,9 @@ export default function Home() {
   };
 
   return (
-    <div 
+    <div
       className="space-y-16 pb-16 animate-fade-up min-h-screen bg-cover bg-center bg-no-repeat bg-fixed relative"
-      style={{ backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url(${homeBg})` }}
+      style={{ backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.55)), url(${homeBg})` }}
     >
       {/* 1. Hero Section */}
       <section className="relative min-h-[75vh] flex flex-col justify-center items-center px-4 bg-transparent overflow-hidden border-b border-[#222]/30">

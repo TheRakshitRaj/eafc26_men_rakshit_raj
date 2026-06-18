@@ -63,30 +63,46 @@ export default function CompareCard({ player, opponent, side = 'left' }) {
     <div className="bg-[#111111] border border-[#222222] rounded-xl p-6 flex flex-col h-full transition-all duration-300">
       
       {/* Player Header */}
-      <div className={`flex items-center space-x-4 border-b border-[#222]/50 pb-5 ${isLeft ? 'flex-row' : 'flex-row-reverse space-x-reverse'}`}>
-        {/* Large OVR */}
-        <div className="text-center">
-          <div className="text-4xl font-display font-extrabold text-[#00FF87] tracking-tighter">
-            {overall}
-          </div>
-          <div className="bg-[#1A1A1A] border border-[#222] text-[#A0A0A0] text-[9px] font-display font-bold px-1.5 py-0.5 rounded uppercase tracking-wider mt-1">
-            {position}
-          </div>
-        </div>
-
-        {/* Name / Info */}
-        <div className={`flex-grow ${isLeft ? 'text-left' : 'text-right'}`}>
-          <h2 className="font-display font-bold text-xl text-white truncate uppercase tracking-wide">
+      {player.card ? (
+        <div className="flex flex-col items-center border-b border-[#222]/50 pb-5">
+          <img
+            src={player.card}
+            className="w-[170px] h-auto object-contain select-none transition-transform duration-300 hover:scale-105"
+            alt={name}
+          />
+          <h2 className="font-display font-extrabold text-lg text-white mt-3 uppercase tracking-wide truncate max-w-[240px]">
             {name}
           </h2>
           <p className="text-xs text-[#00FF87] font-semibold uppercase tracking-wider mt-0.5">
-            {team}
-          </p>
-          <p className="text-[10px] text-[#A0A0A0] font-semibold uppercase tracking-widest">
-            {nation}
+            {team} | {position}
           </p>
         </div>
-      </div>
+      ) : (
+        <div className={`flex items-center space-x-4 border-b border-[#222]/50 pb-5 ${isLeft ? 'flex-row' : 'flex-row-reverse space-x-reverse'}`}>
+          {/* Large OVR */}
+          <div className="text-center">
+            <div className="text-4xl font-display font-extrabold text-[#00FF87] tracking-tighter">
+              {overall}
+            </div>
+            <div className="bg-[#1A1A1A] border border-[#222] text-[#A0A0A0] text-[9px] font-display font-bold px-1.5 py-0.5 rounded uppercase tracking-wider mt-1">
+              {position}
+            </div>
+          </div>
+
+          {/* Name / Info */}
+          <div className={`flex-grow ${isLeft ? 'text-left' : 'text-right'}`}>
+            <h2 className="font-display font-bold text-xl text-white truncate uppercase tracking-wide">
+              {name}
+            </h2>
+            <p className="text-xs text-[#00FF87] font-semibold uppercase tracking-wider mt-0.5">
+              {team}
+            </p>
+            <p className="text-[10px] text-[#A0A0A0] font-semibold uppercase tracking-widest">
+              {nation}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Attributes Comparison */}
       <div className="space-y-4 mt-6 flex-grow">
