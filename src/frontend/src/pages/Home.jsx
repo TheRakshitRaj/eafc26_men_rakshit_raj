@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import homeBg from '../../asset/home-fc.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUserShield, FaExchangeAlt, FaGamepad, FaChartBar, FaUsers, FaGlobe, FaTrophy, FaCalendarAlt } from 'react-icons/fa';
 import api from '../api/axios';
@@ -91,9 +92,12 @@ export default function Home() {
   };
 
   return (
-    <div className="space-y-16 pb-16 animate-fade-up">
+    <div 
+      className="space-y-16 pb-16 animate-fade-up min-h-screen bg-cover bg-center bg-no-repeat bg-fixed relative"
+      style={{ backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url(${homeBg})` }}
+    >
       {/* 1. Hero Section */}
-      <section className="relative min-h-[75vh] flex flex-col justify-center items-center px-4 bg-gradient-to-b from-[#0A0A0A] via-[#0D1510] to-[#0A0A0A] overflow-hidden border-b border-[#222]/30">
+      <section className="relative min-h-[75vh] flex flex-col justify-center items-center px-4 bg-transparent overflow-hidden border-b border-[#222]/30">
         {/* Animated Cyber Grid Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,255,135,0.08),transparent_60%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40"></div>
@@ -172,7 +176,7 @@ export default function Home() {
       </section>
 
       {/* 2. Top Rated Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="max-w-7xl mx-auto px-6 py-8 sm:px-8 bg-[#111]/50 backdrop-blur-md border border-[#222]/50 rounded-2xl space-y-6">
         <div className="flex items-center justify-between border-b border-[#222] pb-4">
           <div>
             <h2 className="font-display font-extrabold text-2xl tracking-wider text-white uppercase">
@@ -210,7 +214,7 @@ export default function Home() {
       </section>
 
       {/* 3. Trending Players Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="max-w-7xl mx-auto px-6 py-8 sm:px-8 bg-[#111]/50 backdrop-blur-md border border-[#222]/50 rounded-2xl space-y-6">
         <div className="flex items-center justify-between border-b border-[#222] pb-4">
           <div>
             <h2 className="font-display font-extrabold text-2xl tracking-wider text-white uppercase flex items-center space-x-2">
@@ -248,7 +252,7 @@ export default function Home() {
       </section>
 
       {/* 4. Analytics Preview Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#111]/40 border border-[#222]/50 rounded-2xl p-6 sm:p-8 space-y-8">
+      <section className="max-w-7xl mx-auto px-6 py-8 sm:px-8 bg-[#111]/50 backdrop-blur-md border border-[#222]/50 rounded-2xl space-y-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#222]/30 pb-4 gap-4">
           <div>
             <h2 className="font-display font-extrabold text-2xl tracking-wider text-white uppercase">
@@ -283,7 +287,7 @@ export default function Home() {
       </section>
 
       {/* 5. Quick Navigation Features Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="max-w-7xl mx-auto px-6 py-8 sm:px-8 bg-[#111]/50 backdrop-blur-md border border-[#222]/50 rounded-2xl space-y-6">
         <div className="border-b border-[#222] pb-4">
           <h2 className="font-display font-extrabold text-2xl tracking-wider text-white uppercase">
             PLATFORM MODULES
@@ -297,7 +301,7 @@ export default function Home() {
           {/* Card 1: Roster */}
           <Link
             to="/players"
-            className="bg-[#111] border border-[#222] rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.15)]"
+            className="bg-[#1A1A1A]/60 backdrop-blur-sm border border-[#222]/80 rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.2)]"
           >
             <FaUsers className="text-3xl text-[#00FF87]" />
             <div>
@@ -313,7 +317,7 @@ export default function Home() {
           {/* Card 2: Compare */}
           <Link
             to="/compare"
-            className="bg-[#111] border border-[#222] rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.15)]"
+            className="bg-[#1A1A1A]/60 backdrop-blur-sm border border-[#222]/80 rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.2)]"
           >
             <FaExchangeAlt className="text-3xl text-[#00FF87]" />
             <div>
@@ -329,7 +333,7 @@ export default function Home() {
           {/* Card 3: Team Builder */}
           <Link
             to="/team-builder"
-            className="bg-[#111] border border-[#222] rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.15)]"
+            className="bg-[#1A1A1A]/60 backdrop-blur-sm border border-[#222]/80 rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.2)]"
           >
             <FaGamepad className="text-3xl text-[#00FF87]" />
             <div>
@@ -345,7 +349,7 @@ export default function Home() {
           {/* Card 4: Analytics */}
           <Link
             to="/analytics"
-            className="bg-[#111] border border-[#222] rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.15)]"
+            className="bg-[#1A1A1A]/60 backdrop-blur-sm border border-[#222]/80 rounded-xl p-6 flex flex-col justify-between h-48 transition-all hover:border-[#00FF87] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,135,0.2)]"
           >
             <FaChartBar className="text-3xl text-[#00FF87]" />
             <div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import teamBuilderBg from '../../asset/team-builder-fc.png';
 import { FaFutbol, FaTrash, FaUndo, FaSearch, FaMagic, FaCloudDownloadAlt } from 'react-icons/fa';
 import api from '../api/axios';
 
@@ -191,7 +192,11 @@ export default function TeamBuilder() {
   const activeSlots = formationsData[formation] || [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fade-up">
+    <div 
+      className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-fixed py-8 animate-fade-up"
+      style={{ backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url(${teamBuilderBg})` }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       
       {/* Title & Chemistry Indicator Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 border-b border-[#222]/50 pb-6">
@@ -206,7 +211,7 @@ export default function TeamBuilder() {
         </div>
 
         {/* Chemistry circular gauge panel */}
-        <div className="bg-[#111] border border-[#222] rounded-xl px-5 py-3 flex items-center space-x-6 w-full lg:w-auto">
+        <div className="bg-[#111]/60 backdrop-blur-md border border-[#222]/50 rounded-xl px-5 py-3 flex items-center space-x-6 w-full lg:w-auto">
           <div className="flex flex-col">
             <span className="text-[9px] font-display font-bold text-[#555] uppercase tracking-widest">
               CHEMISTRY RATING
@@ -222,7 +227,7 @@ export default function TeamBuilder() {
       </div>
 
       {/* Control Actions Row */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-[#111]/40 border border-[#222]/30 rounded-xl px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-[#111]/65 backdrop-blur-md border border-[#222]/40 rounded-xl px-4 py-3">
         {/* Formations list */}
         <div className="flex items-center space-x-2">
           <span className="text-xs text-[#555] font-display font-bold uppercase tracking-wider mr-1">
@@ -269,7 +274,7 @@ export default function TeamBuilder() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Pitch Display (Span 2) */}
-        <div className="lg:col-span-2 bg-[#0E1511] border border-[#19271E] rounded-2xl h-[620px] relative overflow-hidden shadow-inner flex flex-col justify-end p-4">
+        <div className="lg:col-span-2 bg-[#0E1511]/70 backdrop-blur-sm border border-[#19271E]/60 rounded-2xl h-[620px] relative overflow-hidden shadow-inner flex flex-col justify-end p-4">
           
           {/* SVG Pitch Marking lines */}
           <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
@@ -335,7 +340,7 @@ export default function TeamBuilder() {
         {/* Drawer / Sidebar Search Panel (Slot selection) */}
         <div className="col-span-1">
           {activeSlot ? (
-            <div className="bg-[#111] border border-[#00FF87]/30 rounded-2xl p-5 space-y-4 animate-fade-up h-full flex flex-col">
+            <div className="bg-[#111]/75 backdrop-blur-md border border-[#00FF87]/30 rounded-2xl p-5 space-y-4 animate-fade-up h-full flex flex-col">
               
               {/* Selector Header */}
               <div className="flex justify-between items-center border-b border-[#222] pb-3">
@@ -398,7 +403,7 @@ export default function TeamBuilder() {
 
             </div>
           ) : (
-            <div className="bg-[#111] border border-[#222] rounded-2xl p-6 text-center space-y-4 h-full flex flex-col justify-center py-20">
+            <div className="bg-[#111]/75 backdrop-blur-md border border-[#222]/50 rounded-2xl p-6 text-center space-y-4 h-full flex flex-col justify-center py-20">
               <FaFutbol className="text-4xl text-[#555] mx-auto animate-bounce" />
               <h3 className="font-display font-extrabold text-sm text-white uppercase tracking-wider">
                 TACTICAL PANEL IDLE
@@ -412,6 +417,7 @@ export default function TeamBuilder() {
 
       </div>
 
+      </div>
     </div>
   );
 }

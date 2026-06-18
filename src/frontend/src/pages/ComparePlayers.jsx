@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import comparionBg from '../../asset/comparion-fc.png';
 import { FaExchangeAlt, FaTrophy, FaSearch, FaTimes, FaSpinner } from 'react-icons/fa';
 import api from '../api/axios';
 import CompareCard from '../components/CompareCard';
@@ -134,7 +135,11 @@ export default function ComparePlayers() {
   ] : [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 animate-fade-up">
+    <div 
+      className="w-full min-h-screen bg-cover bg-center bg-no-repeat bg-fixed py-8 animate-fade-up"
+      style={{ backgroundImage: `linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url(${comparionBg})` }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       {/* Title */}
       <div className="border-b border-[#222]/50 pb-6">
         <h1 className="font-display font-extrabold text-3xl tracking-wider text-white uppercase flex items-center space-x-3">
@@ -150,7 +155,7 @@ export default function ComparePlayers() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Selector 1 */}
-        <div className="relative bg-[#111] border border-[#222] rounded-xl p-4 space-y-3">
+        <div className="relative bg-[#111]/60 backdrop-blur-md border border-[#222]/50 rounded-xl p-4 space-y-3">
           <label className="block text-xs font-display font-bold text-[#A0A0A0] uppercase tracking-wider">
             FIRST FOOTBALLER SLOT
           </label>
@@ -198,7 +203,7 @@ export default function ComparePlayers() {
         </div>
 
         {/* Selector 2 */}
-        <div className="relative bg-[#111] border border-[#222] rounded-xl p-4 space-y-3">
+        <div className="relative bg-[#111]/60 backdrop-blur-md border border-[#222]/50 rounded-xl p-4 space-y-3">
           <label className="block text-xs font-display font-bold text-[#A0A0A0] uppercase tracking-wider">
             SECOND FOOTBALLER SLOT
           </label>
@@ -263,7 +268,7 @@ export default function ComparePlayers() {
         <div className="space-y-8 animate-fade-up">
           
           {/* Winner Banner */}
-          <div className="bg-gradient-to-r from-[#111] via-[#0E1B15] to-[#111] border border-[#222] rounded-xl p-6 text-center space-y-2">
+          <div className="bg-gradient-to-r from-[#111]/70 via-[#0E1B15]/75 to-[#111]/70 backdrop-blur-md border border-[#222]/50 rounded-xl p-6 text-center space-y-2">
             <div className="inline-flex items-center space-x-2 text-[#00FF87] bg-[#00FF87]/10 px-3 py-1 rounded-full text-xs font-display font-bold uppercase tracking-wider">
               <FaTrophy className="text-xs" />
               <span>HEAD-TO-HEAD DECISION</span>
@@ -299,7 +304,7 @@ export default function ComparePlayers() {
 
         </div>
       ) : (
-        <div className="bg-[#111]/30 border border-dashed border-[#222] rounded-2xl py-24 text-center">
+        <div className="bg-[#111]/45 backdrop-blur-md border border-dashed border-[#222]/60 rounded-2xl py-24 text-center">
           <p className="text-sm font-display font-bold text-[#A0A0A0] uppercase tracking-wider">
             COMPUTATION ENGINE IDLE
           </p>
@@ -309,6 +314,7 @@ export default function ComparePlayers() {
         </div>
       )}
 
+      </div>
     </div>
   );
 }
